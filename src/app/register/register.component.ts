@@ -5,11 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent  {
 
-  constructor() { }
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
 
-  ngOnInit(): void {
+  constructor() {}
+
+
+  register() {
+    console.log(this.email);
+    console.log(this.password);
+    console.log(this.confirmPassword);
   }
 
 }
