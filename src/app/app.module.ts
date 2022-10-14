@@ -6,9 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,8 +34,6 @@ import { NavBarComponentComponent } from './nav-bar-component/nav-bar-component.
     MatPaginatorModule,
     MatNativeDateModule,
     MatToolbarModule,
-
-    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
