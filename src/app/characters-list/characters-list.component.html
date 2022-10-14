@@ -3,30 +3,48 @@
     FILTROS
     <div class="example-container">
       <form [formGroup]="options">
-        <mat-form-field
+        <!-- <mat-form-field
           appearance="fill"
           [hideRequiredMarker]="hideRequiredControl.value"
           [floatLabel]="getFloatLabelValue()"
         >
           <input matInput placeholder="Simple placeholder" required />
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()">
-          <mat-label>Both a label and a placeholder</mat-label>
-          <input matInput placeholder="Simple placeholder" />
+          <mat-label>Nombre</mat-label>
+          <input matInput />
         </mat-form-field>
-
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()">
+          <mat-label>Especie</mat-label>
+          <input matInput />
+        </mat-form-field>
         <mat-form-field
           appearance="fill"
           [hideRequiredMarker]="hideRequiredControl.value"
           [floatLabel]="getFloatLabelValue()"
         >
-          <mat-select required>
+          <mat-select>
             <mat-option>-- None --</mat-option>
-            <mat-option value="option">Option 1</mat-option>
-            <mat-option value="option">Option 2</mat-option>
+            <mat-option value="option">Vivo</mat-option>
+            <mat-option value="option">Muerto</mat-option>
+            <mat-option value="option">Desconocido</mat-option>
           </mat-select>
-          <mat-label><b> Fancy</b> <i> label</i></mat-label>
+          <mat-label>Estado</mat-label>
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          [hideRequiredMarker]="hideRequiredControl.value"
+          [floatLabel]="getFloatLabelValue()"
+        >
+          <mat-select>
+            <mat-option>-- None --</mat-option>
+            <mat-option value="option">Macho</mat-option>
+            <mat-option value="option">Hembra</mat-option>
+            <mat-option value="option">Sin género</mat-option>
+            <mat-option value="option">Desconocido</mat-option>
+          </mat-select>
+          <mat-label>Nombre</mat-label>
         </mat-form-field>
       </form>
     </div>
