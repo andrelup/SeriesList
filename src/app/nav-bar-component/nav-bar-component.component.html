@@ -1,0 +1,9 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>turnoff</mat-icon>
+    </button>
+    <h1 class="example-app-name">Los Personajes de Rick and Martin</h1>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>
