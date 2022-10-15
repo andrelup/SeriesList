@@ -12,24 +12,15 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CharactersListComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  statusOptions: OptionSelect[] = STATUS_OPTIONS;
+  genderOptions: OptionSelect[] = GENDER_OPTIONS;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto' as FloatLabelType);
-  options = this._formBuilder.group({
-    hideRequired: this.hideRequiredControl,
-    floatLabel: this.floatLabelControl,
-  });
 
-  constructor(private _formBuilder: FormBuilder) {}
-
-  getFloatLabelValue(): FloatLabelType {
-    return this.floatLabelControl.value || 'auto';
-  }
+  constructor() {}
 }
 
 export interface PeriodicElement {
@@ -39,6 +30,50 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+export interface OptionSelect {
+  id: number;
+  description: string;
+  value: string;
+}
+const STATUS_OPTIONS: OptionSelect[] = [
+  {
+    id: 1,
+    description: 'Vivo',
+    value: 'alive',
+  },
+  {
+    id: 2,
+    description: 'Muerto',
+    value: 'death',
+  },
+  {
+    id: 3,
+    description: 'Desconocido',
+    value: 'unknown',
+  },
+];
+const GENDER_OPTIONS: OptionSelect[] = [
+  {
+    id: 1,
+    description: 'Macho',
+    value: 'male',
+  },
+  {
+    id: 2,
+    description: 'Hembra',
+    value: 'female',
+  },
+  {
+    id: 3,
+    description: 'Sin género',
+    value: 'genderless',
+  },
+  {
+    id: 4,
+    description: 'Desconocido',
+    value: 'unknown',
+  },
+];
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
