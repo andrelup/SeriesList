@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.css'],
 })
-export class FavoritesComponent implements AfterViewInit {
+export class FavouritesComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   statusOptions: OptionSelect[] = STATUS_OPTIONS;

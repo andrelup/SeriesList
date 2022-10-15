@@ -22,7 +22,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CharacterComponent } from './character/character.component';
 import { UserComponent } from './user/user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { FavoritesComponent } from './favourites/favourites.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 import { UserService } from './services/user.service';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { UserService } from './services/user.service';
     CharacterComponent,
     UserComponent,
     NotFoundComponent,
-    FavoritesComponent,
+    FavouritesComponent,
   ],
   imports: [
     BrowserModule,
