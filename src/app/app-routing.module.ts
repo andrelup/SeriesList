@@ -4,6 +4,7 @@ import { NotFoundError } from 'rxjs';
 
 import { CharacterComponent } from './character/character.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
+import { FavoritesComponent } from './favourites/favourites.component';
 import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -15,15 +16,17 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: '',
+    path: 'logged',
     component: NavBarComponent,
     children: [
       { path: 'list', component: CharactersListComponent },
       { path: 'character', component: CharacterComponent },
+      { path: 'favourites', component: FavoritesComponent },
       { path: 'user', component: UserComponent },
       { path: 'not-found', component: NotFoundComponent },
     ],
   },
+  { path: '**', component: NotFoundComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

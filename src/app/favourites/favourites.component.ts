@@ -5,11 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-characters-list',
-  templateUrl: './characters-list.component.html',
-  styleUrls: ['./characters-list.component.css'],
+  selector: 'app-favourites',
+  templateUrl: './favourites.component.html',
+  styleUrls: ['./favourites.component.css'],
 })
-export class CharactersListComponent implements AfterViewInit {
+export class FavoritesComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   statusOptions: OptionSelect[] = STATUS_OPTIONS;

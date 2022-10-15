@@ -11,6 +11,6 @@ export class CharacterComponent implements OnInit {
 
   ngOnInit(): void {}
   backToHome() {
-    this.router.navigate(['list']);
+    this.router.navigate(['logged/list']);
   }
 }
