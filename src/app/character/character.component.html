@@ -1,13 +1,107 @@
-<div class="text-center mt-5">
+<div class="float-start mt-3 ms-3">
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    (click)="backToHome()"
+  >
+    <i class="bi bi-arrow-left-circle-fill d-inline-block"></i>
+    <span class="ms-2 d-none d-md-inline-block">Volver</span>
+  </button>
+</div>
+<div class="text-center mt-4">
   <img
     src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
     class="rounded"
   />
 </div>
-<div class="row mt-2">
-  <div class="col-10 offset-1">
+<div class="row mt-3 mx-3">
+  <div class="col-12 col-md-8 offset-md-2">
     <div class="card">
-      <div class="card-body"></div>
+      <div class="card-body">
+        <div class="mb-3 row">
+          <label for="staticName" class="col-sm-2 col-form-label"> Name </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticName"
+              value="Rick Sanchez"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="staticStatus" class="col-sm-2 col-form-label">
+            Status
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticStatus"
+              value="Alive"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="staticSpecie" class="col-sm-2 col-form-label">
+            Specie
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticSpecie"
+              value="Human"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="staticGender" class="col-sm-2 col-form-label">
+            Gender
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticGender"
+              value="Male"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="staticOrigin" class="col-sm-2 col-form-label">
+            Origin
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticOrigin"
+              value="Earth (C-137)"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="staticLocation" class="col-sm-2 col-form-label">
+            Location
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              readonly
+              class="form-control-plaintext"
+              id="staticLocation"
+              value="Citadel of Ricks"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

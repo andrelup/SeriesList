@@ -1,4 +1,4 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<!-- <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar">
     <button type="button" class="btn btn-outline-secondary btn-lg">
       <i class="bi bi-box-arrow-left"></i> Salir
@@ -6,4 +6,15 @@
     <h1 class="example-app-name ms-2">Los Personajes de Rick y Morty</h1>
   </mat-toolbar>
   <router-outlet></router-outlet>
-</div>
+</div> -->
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">
+      <button type="button" class="btn btn-secondary btn-sm" (click)="logout()">
+        <i class="bi bi-box-arrow-left"></i>
+      </button>
+      Los Personajes de Rick y Morty
+    </span>
+  </div>
+</nav>
+<router-outlet></router-outlet>
