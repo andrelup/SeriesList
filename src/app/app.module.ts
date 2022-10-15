@@ -17,7 +17,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
-import { NavBarComponentComponent } from './nav-bar-component/nav-bar-component.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { CharacterComponent } from './character/character.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavBarComponentComponent } from './nav-bar-component/nav-bar-component.
     LoginComponent,
     RegisterComponent,
     CharactersListComponent,
-    NavBarComponentComponent,
+    NavBarComponent,
+    CharacterComponent,
   ],
   imports: [
     BrowserModule,

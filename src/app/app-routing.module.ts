@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { CharacterComponent } from './character/character.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { LoginComponent } from './login/login.component';
-import { NavBarComponentComponent } from './nav-bar-component/nav-bar-component.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -11,8 +13,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: '',
-    component: NavBarComponentComponent,
-    children: [{ path: 'list', component: CharactersListComponent }],
+    component: NavBarComponent,
+    children: [
+      { path: 'list', component: CharactersListComponent },
+      { path: 'character', component: CharacterComponent },
+    ],
   },
 ];
 @NgModule({
