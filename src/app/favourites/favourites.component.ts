@@ -1,26 +1,151 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { FloatLabelType } from '@angular/material/form-field';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Character } from '../models/characters';
+import { User } from '../models/user';
+import { CharactersService } from '../services/characters.service';
+import { StorageService } from '../services/storage.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.css'],
 })
-export class FavouritesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+export class FavouritesComponent implements OnInit {
+  displayedColumns: string[] = [
+    'Position',
+    'Name',
+    'Status',
+    'Species',
+    'Gender',
+    'Details',
+    // 'Favourite',
+  ];
+  actualPage: number;
+  totalPages: number;
+  previousPage: any;
+  nextPage: any;
+  genderForm: string;
+  statusForm: string;
+  speciesForm: string;
+  nameForm: string;
+  episodesForm: string;
+  locationForm: string;
+  userData: User;
+  charactersListData: Character[];
+  charactersListFilter: Character[];
+  loadingCharacters: boolean;
   statusOptions: OptionSelect[] = STATUS_OPTIONS;
   genderOptions: OptionSelect[] = GENDER_OPTIONS;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  constructor(
+    private router: Router,
+    private storageService: StorageService,
+    private userService: UserService,
+    private charactersService: CharactersService
+  ) {}
+  ngOnInit(): void {
+    this.userData = this.storageService.getItem('userDetails');
+    this.getCharacters(null);
+  }
+  filterFavourites() {
+    console.log('nameForm: ', this.nameForm);
+    console.log('specieForm: ', this.speciesForm);
+    console.log('statusForm: ', this.statusForm);
+    console.log('genderForm: ', this.genderForm);
+    this.charactersListFilter = [];
+    if (this.nameForm && this.nameForm.length > 0) {
+      this.charactersListFilter = [
+        ...this.charactersListData.filter((item) =>
+          item.name.includes(this.nameForm)
+        ),
+      ];
+    }
+    if (this.speciesForm && this.speciesForm.length > 0) {
+      this.filterBySpecies();
+    }
+    if (this.statusForm && this.statusForm.length > 0) {
+      this.filterByStatus();
+    }
+    if (this.genderForm && this.genderForm.length > 0) {
+      this.filterByGender();
+    }
+    console.log(
+      '[filterFavourites] charactersListFilter: ',
+      this.charactersListFilter
+    );
+  }
+  getCharacters(filters: any) {
+    this.loadingCharacters = true;
+    this.actualPage = 0;
+    this.totalPages = 0;
+    this.previousPage = null;
+    this.nextPage = null;
+    this.charactersListData = [];
+    let ids = '';
+    this.userData.favourites.forEach((item) => (ids += item + ','));
+    this.charactersService.getCharactersById(ids).subscribe({
+      next: (result: any) => {
+        console.log('[getCharacters] result: ', result);
+        if (!result.error) {
+          // this.actualPage = 1;
+          // this.totalPages = result.info.pages;
+          // this.previousPage = null;
+          // this.nextPage = result.info.next;
+          this.charactersListData = result;
+          this.charactersListFilter = result;
+          // this.findFavourites();
+          this.loadingCharacters = false;
+        }
+      },
+      error: (err) => {
+        console.error('[getCharacters] error: ', err);
+      },
+    });
   }
 
-  constructor() {}
+  showDetailCharater(character: any) {
+    this.router.navigate(['logged/character/' + character.id]);
+  }
+  filterBySpecies() {
+    if (this.charactersListFilter.length > 1) {
+      this.charactersListFilter = this.charactersListFilter.filter((item) =>
+        item.species.includes(this.speciesForm)
+      );
+    } else {
+      this.charactersListFilter = [
+        ...this.charactersListData.filter((item) =>
+          item.species.includes(this.speciesForm)
+        ),
+      ];
+    }
+  }
+  filterByStatus() {
+    if (this.charactersListFilter.length > 1) {
+      this.charactersListFilter = this.charactersListFilter.filter((item) =>
+        item.status.toLocaleLowerCase().includes(this.statusForm)
+      );
+    } else {
+      this.charactersListFilter = [
+        ...this.charactersListData.filter((item) =>
+          item.status.toLocaleLowerCase().includes(this.statusForm)
+        ),
+      ];
+    }
+  }
+  filterByGender() {
+    if (this.charactersListFilter.length > 1) {
+      this.charactersListFilter = this.charactersListFilter.filter((item) =>
+        item.gender.toLocaleLowerCase().includes(this.genderForm)
+      );
+    } else {
+      this.charactersListFilter = [
+        ...this.charactersListData.filter((item) =>
+          item.gender.toLocaleLowerCase().includes(this.genderForm)
+        ),
+      ];
+    }
+  }
 }
 
 export interface PeriodicElement {
@@ -41,7 +166,7 @@ const STATUS_OPTIONS: OptionSelect[] = [
   },
   {
     description: 'Dead',
-    value: 'death',
+    value: 'dead',
   },
   {
     description: 'Unknown',
@@ -65,26 +190,4 @@ const GENDER_OPTIONS: OptionSelect[] = [
     description: 'Unknown',
     value: 'unknown',
   },
-];
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
 ];

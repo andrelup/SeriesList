@@ -176,7 +176,7 @@ const STATUS_OPTIONS: OptionSelect[] = [
   },
   {
     description: 'Dead',
-    value: 'death',
+    value: 'dead',
   },
   {
     description: 'Unknown',
