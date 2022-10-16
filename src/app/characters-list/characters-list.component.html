@@ -1,4 +1,4 @@
-<div class="container-flex">
+<div class="container">
   <div class="row mt-3">
     <div class="col-10 offset-1">
       <div class="accordion" id="accordionFilters">
@@ -22,19 +22,36 @@
             data-bs-parent="#accordionFilters"
           >
             <div class="accordion-body">
-              <form>
+              <form (submit)="filterCharacters()">
                 <div class="row">
                   <div class="col-3">
                     <label for="inputName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="inputName" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputName"
+                      [(ngModel)]="nameForm"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
                   </div>
                   <div class="col-3">
                     <label for="inputSpecies" class="form-label">Specie</label>
-                    <input type="text" class="form-control" id="inputSpecies" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputSpecies"
+                      [(ngModel)]="speciesForm"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
                   </div>
                   <div class="col-3">
                     <label for="inputSpecies" class="form-label">Status</label>
-                    <select id="inputSpecies" class="form-select">
+                    <select
+                      id="inputSpecies"
+                      class="form-select"
+                      [(ngModel)]="statusForm"
+                      [ngModelOptions]="{ standalone: true }"
+                    >
                       <option selected></option>
                       <ng-container *ngFor="let status of statusOptions">
                         <option [value]="status.value">
@@ -45,7 +62,12 @@
                   </div>
                   <div class="col-3">
                     <label for="inputSpecies" class="form-label">Gender</label>
-                    <select id="inputSpecies" class="form-select">
+                    <select
+                      id="inputSpecies"
+                      class="form-select"
+                      [(ngModel)]="genderForm"
+                      [ngModelOptions]="{ standalone: true }"
+                    >
                       <option selected></option>
                       <ng-container *ngFor="let gender of genderOptions">
                         <option [value]="gender.value">
@@ -68,7 +90,6 @@
       </div>
     </div>
   </div>
-  <!-- *ngIf="dataSource && dataSource.length > 0" -->
   <div class="row mt-3">
     <div class="col-10 offset-1">
       <table class="table table-striped" *ngIf="!loadingCharacters">
@@ -89,7 +110,10 @@
           </tr>
         </tbody>
       </table>
-      <ul class="pagination justify-content-end">
+      <ul
+        class="pagination justify-content-end"
+        *ngIf="charactersListData && charactersListData.length > 20"
+      >
         <li
           class="page-item"
           [ngClass]="{ disabled: !previousPage }"

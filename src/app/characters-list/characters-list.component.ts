@@ -20,6 +20,10 @@ export class CharactersListComponent implements OnInit {
   totalPages: number;
   previousPage: any;
   nextPage: any;
+  genderForm: string;
+  statusForm: string;
+  speciesForm: string;
+  nameForm: string;
   charactersListData: Character[];
   loadingCharacters: boolean;
   statusOptions: OptionSelect[] = STATUS_OPTIONS;
@@ -27,21 +31,42 @@ export class CharactersListComponent implements OnInit {
 
   constructor(private charactersService: CharactersService) {}
   ngOnInit(): void {
-    this.getCharacters();
+    this.getCharacters(null);
   }
-
-  getCharacters() {
+  filterCharacters() {
+    console.log('nameForm: ', this.nameForm);
+    console.log('specieForm: ', this.speciesForm);
+    console.log('statusForm: ', this.statusForm);
+    console.log('genderForm: ', this.genderForm);
+    let filters: any = {};
+    if (this.nameForm && this.nameForm.length > 0)
+      filters['name'] = this.nameForm;
+    if (this.speciesForm && this.speciesForm.length > 0)
+      filters['species'] = this.speciesForm;
+    if (this.statusForm && this.statusForm.length > 0)
+      filters['status'] = this.statusForm;
+    if (this.genderForm && this.genderForm.length > 0)
+      filters['gender'] = this.genderForm;
+    this.getCharacters(filters);
+  }
+  getCharacters(filters: any) {
     this.loadingCharacters = true;
-    let filters = {};
+    this.actualPage = 0;
+    this.totalPages = 0;
+    this.previousPage = null;
+    this.nextPage = null;
+    this.charactersListData = [];
     this.charactersService.getCharacters(filters).subscribe({
       next: (result: any) => {
         console.log('[getCharacters] result: ', result);
-        this.actualPage = 1;
-        this.totalPages = result.info.pages;
-        this.previousPage = null;
-        this.nextPage = result.info.next;
-        this.charactersListData = result.results;
-        this.loadingCharacters = false;
+        if (!result.error) {
+          this.actualPage = 1;
+          this.totalPages = result.info.pages;
+          this.previousPage = null;
+          this.nextPage = result.info.next;
+          this.charactersListData = result.results;
+          this.loadingCharacters = false;
+        }
       },
       error: (err) => {
         console.log('[getCharacters] error: ', err);
@@ -54,7 +79,6 @@ export class CharactersListComponent implements OnInit {
     if (this.actualPage > 1) {
       this.actualPage--;
       this.loadingCharacters = true;
-      debugger;
       this.charactersService
         .getOtherCharacterPage(this.previousPage)
         .subscribe({
