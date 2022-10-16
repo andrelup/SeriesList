@@ -15,7 +15,7 @@ export class LoginComponent {
 
   login() {
     console.log('EMAIL: ', this.email);
-    console.log('PASSWROD: ', this.password);
+    console.log('PASSWORD: ', this.password);
     this.userService.login(this.email, this.password).subscribe({
       next: (result) => {
         console.log('[login] result: ', result);
@@ -23,7 +23,6 @@ export class LoginComponent {
       },
       error: (err) => {
         console.log('[login] error: ', err);
-        //TODO enseñar toaster de error de contraseña o email erroneos
       },
     });
   }

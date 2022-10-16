@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Character } from '../models/characters';
+import { CharactersService } from '../services/characters.service';
 
 @Component({
   selector: 'app-character',
@@ -7,9 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./character.component.css'],
 })
 export class CharacterComponent implements OnInit {
-  constructor(private router: Router) {}
+  id: string;
+  characterData: Character;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private charactersService: CharactersService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.getCharacterById();
+    });
+  }
+  getCharacterById() {
+    this.charactersService.getCharactersById(this.id).subscribe({
+      next: (result: any) => {
+        console.log('[getCharacterById] result: ', result);
+        if (result.error) {
+          this.router.navigate(['/logged/not-found']);
+        }
+        this.characterData = result;
+      },
+      error: (err) => {
+        console.log('[getCharacterById] error: ', err);
+      },
+    });
+  }
   backToHome() {
     this.router.navigate(['logged/list']);
   }

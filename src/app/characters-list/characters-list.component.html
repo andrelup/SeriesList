@@ -107,6 +107,14 @@
             <td>{{ character.status }}</td>
             <td>{{ character.species }}</td>
             <td>{{ character.gender }}</td>
+            <td>
+              <button
+                class="btn btn-outline-primary"
+                (click)="showDetailCharater(character)"
+              >
+                Show Details
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

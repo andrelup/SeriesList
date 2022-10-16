@@ -20,7 +20,7 @@ const routes: Routes = [
     component: NavBarComponent,
     children: [
       { path: 'list', component: CharactersListComponent },
-      { path: 'character', component: CharacterComponent },
+      { path: 'character/:id', component: CharacterComponent },
       { path: 'favourites', component: FavouritesComponent },
       { path: 'user', component: UserComponent },
       { path: 'not-found', component: NotFoundComponent },

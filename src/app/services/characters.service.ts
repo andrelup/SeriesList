@@ -23,4 +23,7 @@ export class CharactersService {
   getOtherCharacterPage(urlPage: string) {
     return this.http.get(urlPage);
   }
+  getCharactersById(id: any) {
+    return this.http.get(this.url + '/' + id);
+  }
 }

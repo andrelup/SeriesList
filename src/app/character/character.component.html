@@ -8,13 +8,10 @@
     <span class="ms-2 d-none d-md-inline-block">Volver</span>
   </button>
 </div>
-<div class="text-center mt-4">
-  <img
-    src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-    class="rounded"
-  />
+<div class="text-center mt-4" *ngIf="characterData && characterData.image">
+  <img [src]="characterData.image" class="rounded" />
 </div>
-<div class="row mt-3 mx-3">
+<div class="row mt-3 mx-3" *ngIf="characterData">
   <div class="col-12 col-md-8 offset-md-2">
     <div class="card">
       <div class="card-body">
@@ -26,7 +23,7 @@
               readonly
               class="form-control-plaintext"
               id="staticName"
-              value="Rick Sanchez"
+              [ngModel]="characterData.name"
             />
           </div>
         </div>
@@ -40,7 +37,7 @@
               readonly
               class="form-control-plaintext"
               id="staticStatus"
-              value="Alive"
+              [ngModel]="characterData.status"
             />
           </div>
         </div>
@@ -54,7 +51,7 @@
               readonly
               class="form-control-plaintext"
               id="staticSpecie"
-              value="Human"
+              [ngModel]="characterData.species"
             />
           </div>
         </div>
@@ -69,7 +66,7 @@
               readonly
               class="form-control-plaintext"
               id="staticGender"
-              value="Male"
+              [ngModel]="characterData.gender"
             />
           </div>
         </div>
@@ -83,7 +80,7 @@
               readonly
               class="form-control-plaintext"
               id="staticOrigin"
-              value="Earth (C-137)"
+              [ngModel]="characterData.origin.name"
             />
           </div>
         </div>
@@ -97,7 +94,7 @@
               readonly
               class="form-control-plaintext"
               id="staticLocation"
-              value="Citadel of Ricks"
+              [ngModel]="characterData.location.name"
             />
           </div>
         </div>
