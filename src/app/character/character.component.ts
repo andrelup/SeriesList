@@ -33,7 +33,7 @@ export class CharacterComponent implements OnInit {
         this.characterData = result;
       },
       error: (err) => {
-        console.log('[getCharacterById] error: ', err);
+        console.error('[getCharacterById] error: ', err);
       },
     });
   }

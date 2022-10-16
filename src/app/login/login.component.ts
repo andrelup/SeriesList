@@ -22,8 +22,11 @@ export class LoginComponent {
         this.router.navigate(['logged/list']);
       },
       error: (err) => {
-        console.log('[login] error: ', err);
+        console.error('[login] error: ', err);
       },
     });
+  }
+  navigateToRegister() {
+    this.router.navigate(['register']);
   }
 }

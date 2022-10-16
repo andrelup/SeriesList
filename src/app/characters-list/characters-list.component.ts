@@ -74,7 +74,7 @@ export class CharactersListComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log('[getCharacters] error: ', err);
+        console.error('[getCharacters] error: ', err);
       },
     });
   }
@@ -94,7 +94,7 @@ export class CharactersListComponent implements OnInit {
             this.loadingCharacters = false;
           },
           error: (err) => {
-            console.log('[previousPageClick] error: ', err);
+            console.error('[previousPageClick] error: ', err);
           },
         });
     }
@@ -113,7 +113,7 @@ export class CharactersListComponent implements OnInit {
           this.loadingCharacters = false;
         },
         error: (err) => {
-          console.log('[nextPageClick] error: ', err);
+          console.error('[nextPageClick] error: ', err);
         },
       });
     }

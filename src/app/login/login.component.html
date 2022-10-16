@@ -1,22 +1,25 @@
 <!-- login.component.html -->
 
 <div class="login">
-    <form class="custom-form" method="post">
-      <h1>Login</h1>
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="Email"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="Password"
-        required="required"
-      />
-      <button type="submit" (click)="login()">Log in</button>
-    </form>
-  </div>
+  <form class="custom-form" method="post" (submit)="login()">
+    <h1>Login</h1>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
+      required="required"
+    />
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password"
+      required="required"
+    />
+    <button type="submit">Log in</button>
+    <button class="mt-3" type="button" (click)="navigateToRegister()">
+      Register
+    </button>
+  </form>
+</div>

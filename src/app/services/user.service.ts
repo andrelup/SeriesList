@@ -13,4 +13,7 @@ export class UserService {
     let body = { email: email, password: password };
     return this.http.post(this.url + 'login', body);
   }
+  createUser(user: any) {
+    return this.http.post(this.url, user);
+  }
 }
