@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -11,9 +12,13 @@ export class UserComponent {
   password: string;
   confirmPassword: string;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private storageService: StorageService
+  ) {}
   changePassword() {
-    const user = JSON.parse(localStorage.getItem('userDetails') as string);
+    const user = this.storageService.getItem('userDetails');
     if (
       this.password &&
       this.confirmPassword &&

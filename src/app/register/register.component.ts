@@ -22,6 +22,7 @@ export class RegisterComponent {
       let user = {
         email: this.email,
         password: this.password,
+        favourites: [],
       };
       this.userService.createUser(user).subscribe({
         next: (result) => {

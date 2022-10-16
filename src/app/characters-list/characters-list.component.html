@@ -134,10 +134,7 @@
           </tr>
         </tbody>
       </table>
-      <ul
-        class="pagination justify-content-end"
-        *ngIf="charactersListData && charactersListData.length > 20"
-      >
+      <ul class="pagination justify-content-end" *ngIf="totalPages > 1">
         <li
           class="page-item"
           [ngClass]="{ disabled: !previousPage }"

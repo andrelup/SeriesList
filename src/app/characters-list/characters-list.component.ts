@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, MaxLengthValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Character } from '../models/characters';
+import { User } from '../models/user';
 import { CharactersService } from '../services/characters.service';
+import { StorageService } from '../services/storage.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-characters-list',
@@ -27,16 +30,20 @@ export class CharactersListComponent implements OnInit {
   statusForm: string;
   speciesForm: string;
   nameForm: string;
+  userData: User;
   charactersListData: Character[];
   loadingCharacters: boolean;
   statusOptions: OptionSelect[] = STATUS_OPTIONS;
   genderOptions: OptionSelect[] = GENDER_OPTIONS;
 
   constructor(
-    private charactersService: CharactersService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService,
+    private userService: UserService,
+    private charactersService: CharactersService
   ) {}
   ngOnInit(): void {
+    this.userData = this.storageService.getItem('userDetails');
     this.getCharacters(null);
   }
   filterCharacters() {
@@ -71,6 +78,7 @@ export class CharactersListComponent implements OnInit {
           this.previousPage = null;
           this.nextPage = result.info.next;
           this.charactersListData = result.results;
+          this.findFavourites();
           this.loadingCharacters = false;
         }
       },
@@ -92,6 +100,7 @@ export class CharactersListComponent implements OnInit {
             this.previousPage = result.info.prev;
             this.nextPage = result.info.next;
             this.charactersListData = result.results;
+            this.findFavourites();
             this.loadingCharacters = false;
           },
           error: (err) => {
@@ -111,6 +120,7 @@ export class CharactersListComponent implements OnInit {
           this.previousPage = result.info.prev;
           this.nextPage = result.info.next;
           this.charactersListData = result.results;
+          this.findFavourites();
           this.loadingCharacters = false;
         },
         error: (err) => {
@@ -120,10 +130,37 @@ export class CharactersListComponent implements OnInit {
     }
   }
   favouriteClick(character: Character) {
-    character['favourite'] = character['favourite']
-      ? !character['favourite']
-      : true;
+    if (character['favourite']) {
+      const index = this.userData.favourites.indexOf(character.id);
+      if (index > -1) {
+        this.userData.favourites.splice(index, 1);
+      }
+    } else {
+      this.userData.favourites.push(character.id);
+      console.log('userData: ', this.userData);
+    }
+    this.userService.editUser(this.userData).subscribe({
+      next: (result: any) => {
+        console.log('[favouriteClick.editUser] result: ', result);
+        this.storageService.setItem('userDetails', this.userData);
+        character['favourite'] = character['favourite']
+          ? !character['favourite']
+          : true;
+      },
+      error: (err) => {
+        console.error('[favouriteClick.editUser] error: ', err);
+      },
+    });
   }
+  findFavourites() {
+    let favourites = this.userData.favourites;
+    if (favourites && favourites.length > 0) {
+      this.charactersListData.forEach((item) => {
+        item['favourite'] = favourites.includes(item.id) ? true : false;
+      });
+    }
+  }
+
   showDetailCharater(character: any) {
     this.router.navigate(['logged/character/' + character.id]);
   }

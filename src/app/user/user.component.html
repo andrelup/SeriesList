@@ -13,7 +13,7 @@
     <div class="card">
       <div class="card-header"><h2>Change your password</h2></div>
       <div class="card-body">
-        <form>
+        <form (submit)="changePassword()">
           <div class="col-12 col-md-8 col-lg-4 offset-md-2 offset-lg-4">
             <div class="mt-2">
               <label for="inputPassword" class="visually-hidden"
@@ -25,6 +25,7 @@
                 id="inputPassword"
                 placeholder="Password"
                 [(ngModel)]="password"
+                [ngModelOptions]="{ standalone: true }"
               />
             </div>
             <div class="mt-2">
@@ -37,6 +38,7 @@
                 id="inputConfirmPassword"
                 placeholder="Confirm Password"
                 [(ngModel)]="confirmPassword"
+                [ngModelOptions]="{ standalone: true }"
               />
             </div>
             <div class="text-center mt-2">
