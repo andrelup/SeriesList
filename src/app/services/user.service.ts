@@ -16,4 +16,7 @@ export class UserService {
   createUser(user: any) {
     return this.http.post(this.url, user);
   }
+  editUser(user: any) {
+    return this.http.put(this.url, user);
+  }
 }
