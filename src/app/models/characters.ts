@@ -14,4 +14,5 @@ export interface Character {
   };
   image: String;
   episode: String[];
+  favourite: boolean;
 }

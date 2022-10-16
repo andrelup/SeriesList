@@ -115,6 +115,22 @@
                 Show Details
               </button>
             </td>
+            <td>
+              <span (click)="favouriteClick(character)">
+                <ng-container *ngIf="character.favourite">
+                  <i
+                    class="bi bi-heart-fill"
+                    style="font-size: 2rem; color: cornflowerblue"
+                  ></i>
+                </ng-container>
+                <ng-container *ngIf="!character.favourite">
+                  <i
+                    class="bi bi-heart"
+                    style="font-size: 2rem; color: cornflowerblue"
+                  ></i>
+                </ng-container>
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>

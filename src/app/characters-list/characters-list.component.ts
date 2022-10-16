@@ -17,6 +17,7 @@ export class CharactersListComponent implements OnInit {
     'Species',
     'Gender',
     'Details',
+    'Favourite',
   ];
   actualPage: number;
   totalPages: number;
@@ -117,6 +118,11 @@ export class CharactersListComponent implements OnInit {
         },
       });
     }
+  }
+  favouriteClick(character: Character) {
+    character['favourite'] = character['favourite']
+      ? !character['favourite']
+      : true;
   }
   showDetailCharater(character: any) {
     this.router.navigate(['logged/character/' + character.id]);
