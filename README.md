@@ -5,23 +5,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+Librerías usadas:
+He usado angular para construir el fron, porque es la tecnología que uso actualmente en el trabajo, por lo tanto es la que hace sentir más confortable a la hora de programar bien y con rapidez. 
+Sin embargo en el trabajo usamos una versión antigua de angular, y he decido hacer esta prueba en la ultima version de angular para que puedan ver que también puedo salir de mi zona de conforto y construir un buen producto.
+Las demás Librerías usar dentro del proyecto front fueran las que son más usadas dentro de la comunidad angular, porque acaban por ser las mejores documentadas y por si encontro algun error raro tengo el apoyo de la comunidad.
+Estas serían bootstrap para diseño, karma y jasmine para testes unitarios y "@auth0/angular-jwt" para gestionar el token de seguridad.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
