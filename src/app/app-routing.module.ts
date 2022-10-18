@@ -5,7 +5,7 @@ import { NotFoundError } from 'rxjs';
 import { CharacterComponent } from './character/character.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { FavouritesComponent } from './favourites/favourites.component';
-import { AuthGuardService } from './guards/auth-guard-service';
+import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -20,11 +20,11 @@ const routes: Routes = [
     path: 'logged',
     component: NavBarComponent,
     children: [
-      { path: 'list', component: CharactersListComponent, canActivate: [AuthGuardService] },
-      { path: 'character/:id', component: CharacterComponent, canActivate: [AuthGuardService] },
-      { path: 'favourites', component: FavouritesComponent, canActivate: [AuthGuardService] },
-      { path: 'user', component: UserComponent, canActivate: [AuthGuardService] },
-      { path: 'not-found', component: NotFoundComponent, canActivate: [AuthGuardService] },
+      { path: 'list', component: CharactersListComponent, canActivate: [AuthGuard] },
+      { path: 'character/:id', component: CharacterComponent, canActivate: [AuthGuard] },
+      { path: 'favourites', component: FavouritesComponent, canActivate: [AuthGuard] },
+      { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+      { path: 'not-found', component: NotFoundComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', component: NotFoundComponent },
