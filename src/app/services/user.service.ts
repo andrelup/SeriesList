@@ -7,12 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   url = 'http://localhost:3000/users/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  login(email: string, password: string) {
-    let body = { email: email, password: password };
-    return this.http.post(this.url + 'login', body);
-  }
   createUser(user: any) {
     return this.http.post(this.url, user);
   }

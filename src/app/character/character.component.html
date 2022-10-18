@@ -1,13 +1,3 @@
-<div class="float-start mt-3 ms-3">
-  <button
-    class="btn btn-outline-secondary"
-    type="button"
-    (click)="backToHome()"
-  >
-    <i class="bi bi-arrow-left-circle-fill d-inline-block"></i>
-    <span class="ms-2 d-none d-md-inline-block">Volver</span>
-  </button>
-</div>
 <div class="text-center mt-4" *ngIf="characterData && characterData.image">
   <img [src]="characterData.image" class="rounded" />
 </div>

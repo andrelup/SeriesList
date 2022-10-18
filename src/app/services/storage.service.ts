@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StorageService {
-  constructor() {}
+  constructor() { }
 
   setItem(key: string, item: any) {
     let itemStringfy = JSON.stringify(item);
@@ -12,5 +12,9 @@ export class StorageService {
   }
   getItem(key: string) {
     return JSON.parse(sessionStorage.getItem(key) as string);
+  }
+  removeAll() {
+    sessionStorage.removeItem('userDetails');
+    sessionStorage.removeItem('token');
   }
 }
