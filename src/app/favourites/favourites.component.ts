@@ -19,7 +19,6 @@ export class FavouritesComponent implements OnInit {
     'Species',
     'Gender',
     'Details',
-    // 'Favourite',
   ];
   actualPage: number;
   totalPages: number;
@@ -46,36 +45,25 @@ export class FavouritesComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.userData = this.storageService.getItem('userDetails');
-    this.getCharacters(null);
+    this.getFavouritesCharacters(null);
   }
   filterFavourites() {
     console.log('nameForm: ', this.nameForm);
     console.log('specieForm: ', this.speciesForm);
     console.log('statusForm: ', this.statusForm);
     console.log('genderForm: ', this.genderForm);
-    this.charactersListFilter = [];
-    if (this.nameForm && this.nameForm.length > 0) {
-      this.charactersListFilter = [
-        ...this.charactersListData.filter((item) =>
-          item.name.includes(this.nameForm)
-        ),
-      ];
-    }
-    if (this.speciesForm && this.speciesForm.length > 0) {
-      this.filterBySpecies();
-    }
-    if (this.statusForm && this.statusForm.length > 0) {
-      this.filterByStatus();
-    }
-    if (this.genderForm && this.genderForm.length > 0) {
-      this.filterByGender();
-    }
-    console.log(
-      '[filterFavourites] charactersListFilter: ',
-      this.charactersListFilter
-    );
+    console.log('locationForm: ', this.locationForm);
+    console.log('episodesForm: ', this.episodesForm);
+    let filters: any = {};
+    if (this.nameForm) filters['name'] = this.nameForm;
+    if (this.speciesForm) filters['species'] = this.speciesForm;
+    if (this.statusForm) filters['status'] = this.statusForm;
+    if (this.genderForm) filters['gender'] = this.genderForm;
+    if (this.locationForm) filters['location'] = this.locationForm;
+    if (this.episodesForm) filters['episodes'] = this.episodesForm;
+    this.getFavouritesCharacters(filters);
   }
-  getCharacters(filters: any) {
+  getFavouritesCharacters(filters: any) {
     this.loadingCharacters = true;
     this.actualPage = 0;
     this.totalPages = 0;
@@ -84,17 +72,12 @@ export class FavouritesComponent implements OnInit {
     this.charactersListData = [];
     let ids = '';
     this.userData.favourites.forEach((item) => (ids += item + ','));
-    this.charactersService.getCharactersById(ids).subscribe({
+    this.charactersService.getCharactersById(ids, filters).subscribe({
       next: (result: any) => {
-        console.log('[getCharacters] result: ', result);
+        console.log('[getCharactersById] result: ', result);
         if (!result.error) {
-          // this.actualPage = 1;
-          // this.totalPages = result.info.pages;
-          // this.previousPage = null;
-          // this.nextPage = result.info.next;
           this.charactersListData = result;
           this.charactersListFilter = result;
-          // this.findFavourites();
           this.loadingCharacters = false;
         }
       },
@@ -106,45 +89,6 @@ export class FavouritesComponent implements OnInit {
 
   showDetailCharater(character: any) {
     this.router.navigate(['logged/character/' + character.id]);
-  }
-  filterBySpecies() {
-    if (this.charactersListFilter.length > 1) {
-      this.charactersListFilter = this.charactersListFilter.filter((item) =>
-        item.species.includes(this.speciesForm)
-      );
-    } else {
-      this.charactersListFilter = [
-        ...this.charactersListData.filter((item) =>
-          item.species.includes(this.speciesForm)
-        ),
-      ];
-    }
-  }
-  filterByStatus() {
-    if (this.charactersListFilter.length > 1) {
-      this.charactersListFilter = this.charactersListFilter.filter((item) =>
-        item.status.toLocaleLowerCase().includes(this.statusForm)
-      );
-    } else {
-      this.charactersListFilter = [
-        ...this.charactersListData.filter((item) =>
-          item.status.toLocaleLowerCase().includes(this.statusForm)
-        ),
-      ];
-    }
-  }
-  filterByGender() {
-    if (this.charactersListFilter.length > 1) {
-      this.charactersListFilter = this.charactersListFilter.filter((item) =>
-        item.gender.toLocaleLowerCase().includes(this.genderForm)
-      );
-    } else {
-      this.charactersListFilter = [
-        ...this.charactersListData.filter((item) =>
-          item.gender.toLocaleLowerCase().includes(this.genderForm)
-        ),
-      ];
-    }
   }
 }
 

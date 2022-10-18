@@ -23,7 +23,16 @@ export class CharactersService {
   getOtherCharacterPage(urlPage: string) {
     return this.http.get(urlPage);
   }
-  getCharactersById(id: any) {
-    return this.http.get(this.url + '/' + id);
+  getCharactersById(id: any, queryParams?: any) {
+    if (queryParams && Object.keys.length > 0) {
+      let urlCharacters = new URL(this.url + '/' + id);
+      console.log('[getCharacters] queryParams: ', queryParams);
+      Object.keys(queryParams).forEach((key) =>
+        urlCharacters.searchParams.append(key, queryParams[key])
+      );
+      return this.http.get(urlCharacters.toString());
+    } else {
+      return this.http.get(this.url + '/' + id);
+    }
   }
 }
