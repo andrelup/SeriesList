@@ -1,5 +1,7 @@
 # Iniciar el proyecto sin docker
-> npm start
+```
+ npm start
+```
 
 # Iniciar el proyecto con docker
 ```
@@ -7,13 +9,14 @@
  npm run run-docker
 ```
 # Usuario de prueba
-`email`: admin@test.es
+`email:` admin@test.es
 
-`password`: admin
+`password:` admin
 
 ## Lanzar los tests unitarios
+```
 npm run test
-
+```
 
 # Librerías usadas:
 He usado angular para construir el frontend, porque es la tecnología que uso actualmente en el trabajo, por lo tanto es la que me hace sentir más confortable a la hora de programar bien y con rapidez. 
