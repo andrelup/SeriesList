@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-docker": "ng build && docker build -t hiberus_front:latest .",
+    "run-docker": "docker run -d -p 4200:80 --name hiberusFront  hiberus_front:latest",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
