@@ -79,8 +79,8 @@ export class CharactersListComponent implements OnInit {
           this.nextPage = result.info.next;
           this.charactersListData = result.results;
           this.findFavourites();
-          this.loadingCharacters = false;
         }
+        this.loadingCharacters = false;
       },
       error: (err) => {
         console.error('[getCharacters] error: ', err);

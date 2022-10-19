@@ -64,27 +64,29 @@ export class FavouritesComponent implements OnInit {
     this.getFavouritesCharacters(filters);
   }
   getFavouritesCharacters(filters: any) {
-    this.loadingCharacters = true;
-    this.actualPage = 0;
-    this.totalPages = 0;
-    this.previousPage = null;
-    this.nextPage = null;
-    this.charactersListData = [];
-    let ids = '';
-    this.userData.favourites.forEach((item) => (ids += item + ','));
-    this.charactersService.getCharactersById(ids, filters).subscribe({
-      next: (result: any) => {
-        console.log('[getCharactersById] result: ', result);
-        if (!result.error) {
-          this.charactersListData = result;
-          this.charactersListFilter = result;
+    if (this.userData.favourites && this.userData.favourites.length > 0) {
+      this.loadingCharacters = true;
+      this.actualPage = 0;
+      this.totalPages = 0;
+      this.previousPage = null;
+      this.nextPage = null;
+      this.charactersListData = [];
+      let ids = '';
+      this.userData.favourites.forEach((item) => (ids += item + ','));
+      this.charactersService.getCharactersById(ids, filters).subscribe({
+        next: (result: any) => {
+          console.log('[getCharactersById] result: ', result);
+          if (!result.error) {
+            this.charactersListData = result;
+            this.charactersListFilter = result;
+          }
           this.loadingCharacters = false;
-        }
-      },
-      error: (err) => {
-        console.error('[getCharacters] error: ', err);
-      },
-    });
+        },
+        error: (err) => {
+          console.error('[getCharacters] error: ', err);
+        },
+      });
+    }
   }
 
   showDetailCharater(character: any) {
