@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Character } from '../models/characters';
-import { CharactersService } from '../services/characters.service';
+import { Character } from '../../models/characters';
+import { CharactersService } from '../../services/characters.service';
 
 @Component({
   selector: 'app-character',
@@ -15,7 +15,7 @@ export class CharacterComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private charactersService: CharactersService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {

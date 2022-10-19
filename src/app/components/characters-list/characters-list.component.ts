@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, MaxLengthValidator } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Character } from '../models/characters';
-import { User } from '../models/user';
-import { CharactersService } from '../services/characters.service';
-import { StorageService } from '../services/storage.service';
-import { UserService } from '../services/user.service';
+import { Character } from '../../models/characters';
+import { User } from '../../models/user';
+import { CharactersService } from '../../services/characters.service';
+import { StorageService } from '../../services/storage.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-characters-list',
@@ -41,7 +41,7 @@ export class CharactersListComponent implements OnInit {
     private storageService: StorageService,
     private userService: UserService,
     private charactersService: CharactersService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.userData = this.storageService.getItem('userDetails');
     this.getCharacters(null);

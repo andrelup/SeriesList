@@ -7,14 +7,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { CharactersListComponent } from './characters-list/characters-list.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { CharacterComponent } from './character/character.component';
-import { UserComponent } from './user/user.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { FavouritesComponent } from './favourites/favourites.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CharactersListComponent } from './components/characters-list/characters-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CharacterComponent } from './components/character/character.component';
+import { UserComponent } from './components/user/user.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 
 //function is use to get jwt token from local storage

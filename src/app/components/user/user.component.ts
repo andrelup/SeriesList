@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../services/storage.service';
-import { UserService } from '../services/user.service';
+import { StorageService } from '../../services/storage.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +16,7 @@ export class UserComponent {
     private router: Router,
     private userService: UserService,
     private storageService: StorageService
-  ) {}
+  ) { }
   changePassword() {
     const user = this.storageService.getItem('userDetails');
     if (
